@@ -3,5 +3,14 @@ body {
 	background: url("../images/simpsonBG.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
+	font-family: 'Permanent Marker', cursive;
 }
 
+div>#choices {
+	background-color: #A7DBD8;
+	border-radius: 10px;
+}
+
+.btn-group-lg>.btn, .btn-lg {
+	background-color: #E0E4CC;
+}

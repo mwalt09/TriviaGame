@@ -6,8 +6,7 @@
 		{
 			"question": "In which town do the Simpsons reside?",
 			"answer": "Springfield",
-			"choices": ["Springfield", "Shelbyville", "Seinfeld"],
-			"url": "https://media.giphy.com/media/l2JdSdlwFzcChXD1K/giphy.mp4"
+			"choices": ["Springfield", "Shelbyville", "Seinfeld"]
 		},
 		{
 			"question": "What is the name of the Simpsons' next door neighbor?",
@@ -61,7 +60,7 @@
 	// Creates the text and button to start the game
 	// ==============================================
 
-	var intro = "<h2>CLICK THE BUTTON BELOW TO BEGIN</h2><button class='btn btn-default btn-lg' id='start' type='submit'>WOO HOO!</button";
+	var intro = "<h2>CLICK THE BUTTON BELOW TO BEGIN</h2><br><button class='btn btn-default btn-lg' id='start' type='submit'>WOO HOO!</button";
 	
 	// ==============================================
 
@@ -99,7 +98,18 @@ function generateHTML() {
 
 function isGameOver() {
 	if(gameOver === (wins + loses)) {
-		
+		$("#timer").empty();
+		$("#choices").empty();
+		var correct = $("<div> <h1> Game Over </h1>");
+		$("#timer").html(correct);
+		if (wins >= 3) {
+			var stats = $("<div> <h2> Good Job </h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3> <button class='btn btn-danger btn-lg' id='reset' type='submit'>Reset</button");
+			$("#choices").html(stats);
+		} else {
+			var stats = $("<div> <h2> Better Luck Next Time </h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3> <button class='btn btn-danger btn-lg' id='reset' type='submit'>Reset</button");
+			$("#choices").html(stats);
+		}
+
 	}
 }
 
@@ -108,7 +118,6 @@ function isRight() {
 	$("#timer").empty();
 	$("#choices").empty();
 	var correct = $("<div> <h2> WOO HOO! You got that one right! </h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3>");
-	// var gif = $("<img src='" + triviaQuestions[questionCounter].url + "'>");
 	$("#timer").html(correct);
 	// $("#choices").html(gif);
 	setTimeout(transition, 5000);
@@ -120,6 +129,8 @@ function isWrong() {
 	$("#choices").empty();
 	var correct = $("<div> <h2> D'oh!!! Better luck next time!</h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3>");
 	$("#timer").html(correct);
+	var answer = $("<div> <h3>" + triviaQuestions[questionCounter].answer + "</h3> </div>");
+	$("#choices").html(answer);
 	setTimeout(transition, 5000);
 }
 
@@ -129,12 +140,15 @@ function outOfTime() {
 	$("#choices").empty();
 	var correct = $("<div> <h2> D'oh!!! Better luck next time!</h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3>");
 	$("#timer").html(correct);
+	var answer = $("<div> <h3>" + triviaQuestions[questionCounter].answer + "</h3> </div>");
+	$("#choices").html(answer);
 	setTimeout(transition, 5000);
 }
 
 function transition() {
 	questionCounter++;
 	number = 30;
+	isGameOver();
 	generateHTML();
 	clock();
 }
@@ -153,6 +167,14 @@ function clock() {
 			number--;
 		}
 	}
+}
+
+function reset() {
+	wins = 0;
+	loses = 0;
+	questionCounter = 0;
+	generateHTML();
+	clock();
 }
 
 $(document).ready(function() {	
@@ -185,17 +207,13 @@ $(document).ready(function() {
 		console.log(triviaQuestions[questionCounter].answer);
 	})
 	
+	$("body").on("click", "#reset", function() {
+		reset();
+	})
 	
 
 }) //Close jQuery wrapper 
 
-//Render questions to the screen (randomly?)
-//Render answer choices to the screen randomly.
-//30 second timer for each question.
-//After each question show the correct answer regardless if correct or wrong.
-//Automatically switch to the next question without user interaction.
-//After trivia quiz is completed, render the results.
-//Button to restart the game.
 
 
 

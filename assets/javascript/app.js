@@ -60,7 +60,7 @@
 	// Creates the text and button to start the game
 	// ==============================================
 
-	var intro = "<h2>CLICK THE BUTTON BELOW TO BEGIN</h2><br><button class='btn btn-default btn-lg' id='start' type='submit'>WOO HOO!</button";
+	var intro = "<h1>Lets see how much you know about The Simpsons</h1><br><button class='btn btn-default btn-lg' id='start' type='submit'>BEGIN</button";
 	
 	// ==============================================
 
@@ -103,10 +103,10 @@ function isGameOver() {
 		var correct = $("<div> <h1> Game Over </h1>");
 		$("#timer").html(correct);
 		if (wins >= 3) {
-			var stats = $("<div> <h2> Good Job </h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3> <button class='btn btn-danger btn-lg' id='reset' type='submit'>Reset</button");
+			var stats = $("<div> <h2> Good Job </h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3> <button class='btn btn-default btn-lg' id='start' type='submit'>Restart</button>");
 			$("#choices").html(stats);
 		} else {
-			var stats = $("<div> <h2> Better Luck Next Time </h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3> <button class='btn btn-danger btn-lg' id='reset' type='submit'>Reset</button");
+			var stats = $("<div> <h2> Better Luck Next Time </h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3> <button class='btn btn-default btn-lg' id='start' type='submit'>Restart</button");
 			$("#choices").html(stats);
 		}
 
@@ -118,7 +118,7 @@ function isRight() {
 	$("#timer").empty();
 	$("#choices").empty();
 	var correct = $("<div> <h2> WOO HOO! You got that one right! </h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3>");
-	$("#timer").html(correct);
+	$("#choices").html(correct);
 	// $("#choices").html(gif);
 	setTimeout(transition, 5000);
 }
@@ -128,9 +128,9 @@ function isWrong() {
 	$("#timer").empty();
 	$("#choices").empty();
 	var correct = $("<div> <h2> D'oh!!! Better luck next time!</h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3>");
-	$("#timer").html(correct);
-	var answer = $("<div> <h3>" + triviaQuestions[questionCounter].answer + "</h3> </div>");
-	$("#choices").html(answer);
+	$("#choices").html(correct);
+	var answer = $("<div> <h3>Correct Answer: " + triviaQuestions[questionCounter].answer + "</h3> </div>");
+	$("#choices").append(answer);
 	setTimeout(transition, 5000);
 }
 
@@ -139,9 +139,9 @@ function outOfTime() {
 	$("#timer").empty();
 	$("#choices").empty();
 	var correct = $("<div> <h2> D'oh!!! Better luck next time!</h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3>");
-	$("#timer").html(correct);
-	var answer = $("<div> <h3>" + triviaQuestions[questionCounter].answer + "</h3> </div>");
-	$("#choices").html(answer);
+	$("#choices").html(correct);
+	var answer = $("<div> <h3>Correct Answer: " + triviaQuestions[questionCounter].answer + "</h3> </div>");
+	$("#choices").append(answer);
 	setTimeout(transition, 5000);
 }
 
@@ -188,9 +188,18 @@ $(document).ready(function() {
 	//On-Click for start page
 	$("body").on("click", "#start", function(event) {
 		event.preventDefault();
+
 		generateHTML();	
 		clock();
 	})
+
+	// $(".answer").mouseenter(function() {
+	// 	$(".answer").css("background-color", "#E0E4CC");
+	// })
+
+	// $(".answer").mouseleave(function() {
+	// 	$(".answer").css("background-color", "#A7DBD8");
+	// })
 
 	$("body").on("click", ".answer", function() {
 		playerChoice = $(this).text();

@@ -14,3 +14,8 @@ div>#choices {
 .btn-group-lg>.btn, .btn-lg {
 	background-color: #E0E4CC;
 }
+
+#answer {
+	background-color: white;
+	width: 200px;
+}

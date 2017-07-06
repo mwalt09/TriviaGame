@@ -15,7 +15,12 @@ div>#choices {
 	background-color: #E0E4CC;
 }
 
-#answer {
-	background-color: white;
-	width: 200px;
+.answer {
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: #E0E4CC;
+	width: 400px;
+	margin: 10px auto;
+	padding: 5px 0px;
+	cursor: pointer;
 }

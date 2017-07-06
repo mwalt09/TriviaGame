@@ -181,6 +181,15 @@ function reset() {
 	clock();
 }
 
+// $(".answer").mouseenter(function() {
+// 		// $(".answer").css("background-color", blue);
+// 	})
+
+// 	$("h3").mouseleave(function() {
+// 		// $(".answer").css("background-color", #A7DBD8);
+// 	})
+// }	
+
 $(document).ready(function() {
 
 // Begin game logic
@@ -200,13 +209,12 @@ $(document).ready(function() {
 		themeSong.pause();
 	})
 
-	// $(".answer").mouseenter(function() {
-	// 	$(".answer").css("background-color", "#E0E4CC");
-	// })
-
-	// $(".answer").mouseleave(function() {
-	// 	$(".answer").css("background-color", "#A7DBD8");
-	// })
+	 // $("h3 .answer").on("mouseenter", function(){
+  //       $("h3 .answer").css("background-color", "yellow");
+  //   });
+  //   $(".answer").mouseleave(function(){
+  //       $(".answer").css("background-color", "lightgray");
+  //   });
 
 	$("body").on("click", ".answer", function() {
 		playerChoice = $(this).text();
@@ -227,6 +235,8 @@ $(document).ready(function() {
 		reset();
 		console.log("click");
 	})
+
+
 
 
 }); //Close jQuery wrapper

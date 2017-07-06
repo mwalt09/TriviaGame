@@ -30,7 +30,7 @@
 		},
 	];
 
-
+	var themeSong = new Audio("assets/theSimpsons.mp3");
 
 	// var clickCounter = 0;
 
@@ -61,7 +61,7 @@
 	// ==============================================
 
 	var intro = "<h1>Lets see how much you know about The Simpsons</h1><br><button class='btn btn-default btn-lg' id='start' type='submit'>BEGIN</button";
-	
+
 	// ==============================================
 
 	// Game Info
@@ -77,6 +77,7 @@
 	// =======================================
 
 	var gameOver = triviaQuestions.length;
+	console.log(gameOver);
 
 // Functions
 // ===============================================================================
@@ -103,10 +104,10 @@ function isGameOver() {
 		var correct = $("<div> <h1> Game Over </h1>");
 		$("#timer").html(correct);
 		if (wins >= 3) {
-			var stats = $("<div> <h2> Good Job </h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3> <button class='btn btn-default btn-lg' id='start' type='submit'>Restart</button>");
+			var stats = $("<div> <h2> Good Job </h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3> <button class='btn btn-default btn-lg' id='reset' type='submit'>Restart</button>");
 			$("#choices").html(stats);
 		} else {
-			var stats = $("<div> <h2> Better Luck Next Time </h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3> <button class='btn btn-default btn-lg' id='start' type='submit'>Restart</button");
+			var stats = $("<div> <h2> Better Luck Next Time </h2> <h3> Correct: " + wins + "</h3> <h3> Incorrect: " + loses + "</h3> <button class='btn btn-default btn-lg' id='reset' type='submit'>Restart</button");
 			$("#choices").html(stats);
 		}
 
@@ -148,9 +149,12 @@ function outOfTime() {
 function transition() {
 	questionCounter++;
 	number = 30;
-	isGameOver();
-	generateHTML();
-	clock();
+	if(gameOver === (wins + loses)) {
+	  isGameOver();
+	} else {
+	  generateHTML();
+	  clock();
+	}
 }
 
 function clock() {
@@ -162,7 +166,7 @@ function clock() {
 		if (number === 0) {
 			clearInterval(intervalId);
 			outOfTime();
-		} 
+		}
 		if (number > 0) {
 			number--;
 		}
@@ -177,7 +181,7 @@ function reset() {
 	clock();
 }
 
-$(document).ready(function() {	
+$(document).ready(function() {
 
 // Begin game logic
 // ======================================================
@@ -185,12 +189,15 @@ $(document).ready(function() {
 	//Start Page
 	$("#choices").prepend(intro);
 
+	themeSong.play();
+
 	//On-Click for start page
 	$("body").on("click", "#start", function(event) {
 		event.preventDefault();
 
-		generateHTML();	
+		generateHTML();
 		clock();
+		themeSong.pause();
 	})
 
 	// $(".answer").mouseenter(function() {
@@ -215,29 +222,11 @@ $(document).ready(function() {
 		console.log(playerChoice);
 		console.log(triviaQuestions[questionCounter].answer);
 	})
-	
+
 	$("body").on("click", "#reset", function() {
 		reset();
+		console.log("click");
 	})
-	
-
-}) //Close jQuery wrapper 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}); //Close jQuery wrapper
